@@ -37,6 +37,39 @@
     }
     return self;
 }
+#if 1
+- (void)step
+{
+    NSLog(@"%s",__func__);
+    _leftCover.x = -leftCoverLength;
+    _rightCover.x = middleMargin;
+    [UIView animateWithDuration:1.5 animations:^{
+        
+        _leftCover.right = ScreenWidth;
+        _rightCover.x = ScreenWidth + middleMargin;
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+
+}
+
+- (void)startAnimation
+{
+    NSLog(@"%s",__func__);
+    if (!_timer)
+    {
+        self.timer = [NSTimer timerWithTimeInterval:2.0
+                                             target:self
+                                           selector:@selector(step)
+                                           userInfo:nil
+                                            repeats:YES];
+        
+        [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSDefaultRunLoopMode];
+        [[NSRunLoop mainRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
+    }
+}
+#else
 
 - (void)step
 {
@@ -65,6 +98,7 @@
         [[NSRunLoop mainRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
     }
 }
+#endif
 
 - (UIView *)leftCover
 {
