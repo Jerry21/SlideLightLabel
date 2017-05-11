@@ -25,15 +25,15 @@
     self = [super initWithFrame:frame];
     if (self) {
         middleMargin = 86;
-        leftCoverLength = ScreenWidth - middleMargin / 2;
-        rightCoverLength = ScreenWidth - middleMargin / 2;
+        leftCoverLength = (ScreenWidth);
+        rightCoverLength = leftCoverLength;
         coverAlpha = 0.7;
         
         [self addSubview:self.leftCover];
         [self addSubview:self.rightCover];
         self.backgroundColor = [UIColor clearColor];
         
-//        [self startAnimation];
+        [self startAnimation];
     }
     return self;
 }
@@ -44,9 +44,10 @@
     _leftCover.x += 1;
     _rightCover.x += 1;
     
-    if (_leftCover.x > ScreenWidth - middleMargin / 2) {
-        _leftCover.x = 0;
-        _rightCover.x = _leftCover.width + middleMargin;
+    if (_rightCover.x > ScreenWidth )
+    {
+        _leftCover.x = -leftCoverLength;
+        _rightCover.x = middleMargin;
     }
 }
 
@@ -54,7 +55,7 @@
 {
     if (!_timer)
     {
-        self.timer = [NSTimer timerWithTimeInterval:1.0/600.0
+        self.timer = [NSTimer timerWithTimeInterval:1.0/200.0
                                              target:self
                                            selector:@selector(step)
                                            userInfo:nil

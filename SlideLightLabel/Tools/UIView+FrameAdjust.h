@@ -11,6 +11,8 @@
 @interface UIView (FrameAdjust)
 @property (nonatomic, assign) CGFloat x;
 @property (nonatomic, assign) CGFloat y;
+@property (nonatomic, assign) CGFloat right;
+@property (nonatomic, assign) CGFloat bottom; 
 @property (nonatomic, assign) CGFloat width;
 @property (nonatomic, assign) CGFloat height; 
 @end

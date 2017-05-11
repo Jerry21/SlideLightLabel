@@ -30,6 +30,26 @@
     return self.frame.origin.y;
 }
 
+- (void)setRight:(CGFloat)right
+{
+    self.frame = CGRectMake(right - self.width, self.y, self.width, self.height);
+}
+
+- (CGFloat)right
+{
+    return self.x = self.width;
+}
+
+- (void)setBottom:(CGFloat)bottom
+{
+    self.frame = CGRectMake(self.x, bottom - self.y, self.width, self.height);
+}
+
+- (CGFloat)bottom
+{
+    return self.y + self.height;
+}
+
 - (void)setWidth:(CGFloat)width
 {
     self.frame = CGRectMake(self.x, self.y, width, self.height);

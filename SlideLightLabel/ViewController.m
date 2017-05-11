@@ -12,7 +12,6 @@
 @interface ViewController ()
 @property (nonatomic, strong) UILabel *textLabel;
 @property (nonatomic, strong) CoverView *coverView;
-@property (nonatomic, strong) NSTimer *timer;
 @end
 
 @implementation ViewController
@@ -22,8 +21,6 @@
     
     [self.view addSubview:self.textLabel];
     [self.view addSubview:self.coverView];
-    
-    [self startAnimation];
 }
 
 - (void)viewDidPan:(UIPanGestureRecognizer *)pan
@@ -34,33 +31,6 @@
     
     _coverView.center = CGPointMake(x, y);
     [pan setTranslation:CGPointZero inView:_coverView];
-}
-
-- (void)step
-{
-    NSLog(@"step");
-    _coverView.x += 1;
-    
-    CGFloat w = ScreenWidth - 86;
-    if (_coverView.x > w) {
-        _coverView.x = -w;
-        
-    }
-}
-
-- (void)startAnimation
-{
-    if (!_timer)
-    {
-        self.timer = [NSTimer timerWithTimeInterval:1.0/600.0
-                                             target:self
-                                           selector:@selector(step)
-                                           userInfo:nil
-                                            repeats:YES];
-        
-        [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSDefaultRunLoopMode];
-        [[NSRunLoop mainRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
-    }
 }
 
 - (CoverView *)coverView
