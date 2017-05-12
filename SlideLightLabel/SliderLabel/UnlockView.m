@@ -1,24 +1,29 @@
 //
-//  CoverView.m
+//  UnlockView.m
 //  SlideLightLabel
 //
-//  Created by yejunyou on 2017/5/11.
+//  Created by yejunyou on 2017/5/12.
 //  Copyright © 2017年 yejunyou. All rights reserved.
 //
 
-#import "CoverView.h"
+#import "UnlockView.h"
 
-@interface CoverView ()
+#define kSliderTime  2.0f
+
+@interface UnlockView ()
 {
     CGFloat leftCoverLength;
     CGFloat middleMargin;
     CGFloat rightCoverLength;
     CGFloat coverAlpha;
 }
+@property (nonatomic, strong) UILabel *textLabel;
+
 @property (nonatomic, strong) NSTimer *timer;
+
 @end
 
-@implementation CoverView
+@implementation UnlockView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -29,6 +34,10 @@
         rightCoverLength = leftCoverLength;
         coverAlpha = 0.7;
         
+        _sliderTime = kSliderTime;
+        _cycleTime = kSliderTime;
+        
+        [self addSubview:self.textLabel];
         [self addSubview:self.leftCover];
         [self addSubview:self.rightCover];
         self.backgroundColor = [UIColor clearColor];
@@ -37,29 +46,24 @@
     }
     return self;
 }
-#if 1
+
 - (void)step
 {
-    NSLog(@"%s",__func__);
     _leftCover.x = -leftCoverLength;
     _rightCover.x = middleMargin;
-    [UIView animateWithDuration:1.5 animations:^{
+    [UIView animateWithDuration:_sliderTime animations:^{
         
         _leftCover.right = ScreenWidth;
         _rightCover.x = ScreenWidth + middleMargin;
         
-    } completion:^(BOOL finished) {
-        
     }];
-
 }
 
 - (void)startAnimation
 {
-    NSLog(@"%s",__func__);
     if (!_timer)
     {
-        self.timer = [NSTimer timerWithTimeInterval:2.0
+        self.timer = [NSTimer timerWithTimeInterval:_cycleTime
                                              target:self
                                            selector:@selector(step)
                                            userInfo:nil
@@ -69,36 +73,45 @@
         [[NSRunLoop mainRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
     }
 }
-#else
 
-- (void)step
+- (void)setSliderTime:(NSTimeInterval)sliderTime
 {
-    NSLog(@"step");
-    _leftCover.x += 1;
-    _rightCover.x += 1;
-    
-    if (_rightCover.x > ScreenWidth )
+    _sliderTime = sliderTime;
+    _cycleTime = _sliderTime;
+}
+
+- (void)setCycleTime:(NSTimeInterval)cycleTime
+{
+    if (cycleTime < _sliderTime)
     {
-        _leftCover.x = -leftCoverLength;
-        _rightCover.x = middleMargin;
+        _cycleTime = _sliderTime;
+        _cycleTime = cycleTime;
+    }
+    else
+    {
+        _cycleTime = cycleTime;
     }
 }
 
-- (void)startAnimation
+- (void)setFontSize:(NSInteger)fontSize
 {
-    if (!_timer)
-    {
-        self.timer = [NSTimer timerWithTimeInterval:1.0/200.0
-                                             target:self
-                                           selector:@selector(step)
-                                           userInfo:nil
-                                            repeats:YES];
-        
-        [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSDefaultRunLoopMode];
-        [[NSRunLoop mainRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
-    }
+    _fontSize = fontSize;
+    _textLabel.font = [UIFont systemFontOfSize:fontSize];
 }
-#endif
+
+- (void)setText:(NSString *)text
+{
+    _text = text;
+    _textLabel.text = text;
+}
+
+- (void)setNormalColor:(UIColor *)normalColor
+{
+    _normalColor = normalColor;
+    _textLabel.backgroundColor = normalColor;
+    _leftCover.backgroundColor = normalColor;
+    _rightCover.backgroundColor = normalColor;
+}
 
 - (UIView *)leftCover
 {
@@ -121,5 +134,19 @@
         _rightCover.alpha = coverAlpha;
     }
     return _rightCover;
+}
+
+- (UILabel *)textLabel
+{
+    if (_textLabel == nil) {
+        _textLabel  = [[UILabel alloc] init];
+        _textLabel.frame = CGRectMake(0, 0, ScreenWidth, self.height);
+        _textLabel.text = @">>> 滑动来解锁 >>>";
+        _textLabel.font = [UIFont systemFontOfSize:30];
+        _textLabel.textAlignment = NSTextAlignmentCenter;
+        _textLabel.textColor = [UIColor whiteColor];
+        _textLabel.backgroundColor = [UIColor grayColor];
+    }
+    return _textLabel;
 }
 @end

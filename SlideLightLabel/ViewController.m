@@ -7,11 +7,12 @@
 //
 
 #import "ViewController.h"
-#import "CoverView.h"
+#import "UnlockView.h"
+
+static NSInteger flag = 0;
 
 @interface ViewController ()
-@property (nonatomic, strong) UILabel *textLabel;
-@property (nonatomic, strong) CoverView *coverView;
+
 @end
 
 @implementation ViewController
@@ -19,44 +20,100 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor grayColor];
-    [self.view addSubview:self.textLabel];
-    [self.view addSubview:self.coverView];
+    
+    
+    [self setupUnlockView];
+    [self adTapGes];
+}
+
+- (void)adTapGes
+{
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClick)];
+    [self.view addGestureRecognizer:tap];
+    
+//    for (UnlockView *view in self.view.subviews)
+//    {
+//        if (![view isKindOfClass:[UnlockView class]]) continue;
+//        [view.leftCover addGestureRecognizer:tap];
+//        [view.rightCover addGestureRecognizer:tap];
+//    }
+}
+
+- (void)tapClick
+{
+    for (NSInteger i = 0; i < self.view.subviews.count; i ++)
+    {
+        UnlockView *unlockView = [self.view viewWithTag:i];
+        if (![unlockView isKindOfClass:[UnlockView class]]) continue;
+        [self setBGClolor:unlockView idnex:i];
+    }
+    flag++;
+}
+
+- (void)setupUnlockView
+{
+    CGFloat height = 40;
+    NSInteger count = (NSInteger) ScreenHeight / height;
+    CGFloat width = ScreenWidth;
+    CGFloat x = 0;
+    
+    for (NSInteger i = 0; i < count ; i ++)
+    {
+        CGFloat y = i * (height) + 20;
+        CGRect frame = CGRectMake(x, y, width, height);
+        UnlockView *unlockView = [[UnlockView alloc] initWithFrame:frame];
+        unlockView.sliderTime = (i * 0.2 + 1) ;
+        unlockView.fontSize = 20;
+        unlockView.tag = i;
+        
+        
+        [self setBGClolor:unlockView idnex:i];
+        
+        [self.view addSubview:unlockView];
+    }
+}
+
+- (void)setBGClolor:(UnlockView *)unlockView idnex:(NSInteger)i
+{
+    
+    CGFloat R = arc4random_uniform(255) / 255.0;
+    CGFloat G = arc4random_uniform(255) / 255.0;
+    CGFloat B = arc4random_uniform(255) / 255.0;
+    
+    if (flag % 3 == 0)
+    {
+        unlockView.normalColor = [UIColor colorWithRed:R green:G blue:B alpha:1.0];
+    }
+    else if (flag % 3 == 1)
+    {
+        unlockView.normalColor = [UIColor grayColor];
+    }else
+    {
+        if (i%2 == 0)
+        {
+            unlockView.normalColor = [UIColor grayColor];
+        }
+        else
+        {
+            unlockView.normalColor = [UIColor colorWithRed:R green:G blue:B alpha:1.0];
+        }
+    }
 }
 
 - (void)viewDidPan:(UIPanGestureRecognizer *)pan
 {
     CGPoint offert = [pan translationInView:self.view];
-    CGFloat x = _coverView.center.x + offert.x;
-    CGFloat y = _coverView.center.y + offert.y;
+    UIView *drapObj;
     
-    _coverView.center = CGPointMake(x, y);
-    [pan setTranslation:CGPointZero inView:_coverView];
+    CGFloat x = drapObj.center.x + offert.x;
+    CGFloat y = drapObj.center.y + offert.y;
+    
+    drapObj.center = CGPointMake(x, y);
+    [pan setTranslation:CGPointZero inView:drapObj];
 }
 
-- (CoverView *)coverView
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    if (!_coverView) {
-        CGRect frame = CGRectMake(0, self.textLabel.y, self.textLabel.width * 2, self.textLabel.height);
-        _coverView = [[CoverView alloc] initWithFrame:frame];
-        
-        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidPan:)];
-        [_coverView addGestureRecognizer:pan];
-    }
-    return _coverView;
+    
 }
-
-- (UILabel *)textLabel
-{
-    if (_textLabel == nil) {
-        _textLabel  = [[UILabel alloc] init];
-        _textLabel.frame = CGRectMake(0, ScreenHeight/2, ScreenWidth, 104);
-        _textLabel.text = @">>> 滑动来解锁 >>>";
-        _textLabel.font = [UIFont systemFontOfSize:40];
-        _textLabel.textAlignment = NSTextAlignmentCenter;
-        _textLabel.textColor = [UIColor whiteColor];
-        _textLabel.backgroundColor = [UIColor grayColor];
-    }
-    return _textLabel;
-}
-
 @end

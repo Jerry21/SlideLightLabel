@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		75485CDD1EC58262004D9EB0 /* UnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75485CDC1EC58262004D9EB0 /* UnlockView.m */; };
 		75FE95D91EC4773500A9C91F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FE95D81EC4773500A9C91F /* main.m */; };
 		75FE95DC1EC4773500A9C91F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FE95DB1EC4773500A9C91F /* AppDelegate.m */; };
 		75FE95DF1EC4773500A9C91F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FE95DE1EC4773500A9C91F /* ViewController.m */; };
@@ -14,10 +15,11 @@
 		75FE95E41EC4773500A9C91F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75FE95E31EC4773500A9C91F /* Assets.xcassets */; };
 		75FE95E71EC4773500A9C91F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75FE95E51EC4773500A9C91F /* LaunchScreen.storyboard */; };
 		75FE95F21EC4789A00A9C91F /* UIView+FrameAdjust.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FE95F11EC4789A00A9C91F /* UIView+FrameAdjust.m */; };
-		75FE95F51EC47A7200A9C91F /* CoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FE95F41EC47A7200A9C91F /* CoverView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		75485CDB1EC58262004D9EB0 /* UnlockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnlockView.h; sourceTree = "<group>"; };
+		75485CDC1EC58262004D9EB0 /* UnlockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnlockView.m; sourceTree = "<group>"; };
 		75FE95D41EC4773500A9C91F /* SlideLightLabel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlideLightLabel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75FE95D81EC4773500A9C91F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		75FE95DA1EC4773500A9C91F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -31,8 +33,6 @@
 		75FE95EF1EC4784A00A9C91F /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		75FE95F01EC4789A00A9C91F /* UIView+FrameAdjust.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameAdjust.h"; sourceTree = "<group>"; };
 		75FE95F11EC4789A00A9C91F /* UIView+FrameAdjust.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameAdjust.m"; sourceTree = "<group>"; };
-		75FE95F31EC47A7200A9C91F /* CoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverView.h; sourceTree = "<group>"; };
-		75FE95F41EC47A7200A9C91F /* CoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +46,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		75485CDA1EC5823F004D9EB0 /* SliderLabel */ = {
+			isa = PBXGroup;
+			children = (
+				75485CDB1EC58262004D9EB0 /* UnlockView.h */,
+				75485CDC1EC58262004D9EB0 /* UnlockView.m */,
+			);
+			path = SliderLabel;
+			sourceTree = "<group>";
+		};
 		75FE95CB1EC4773500A9C91F = {
 			isa = PBXGroup;
 			children = (
@@ -65,13 +74,12 @@
 		75FE95D61EC4773500A9C91F /* SlideLightLabel */ = {
 			isa = PBXGroup;
 			children = (
+				75485CDA1EC5823F004D9EB0 /* SliderLabel */,
 				75FE95EE1EC4783300A9C91F /* Tools */,
 				75FE95DA1EC4773500A9C91F /* AppDelegate.h */,
 				75FE95DB1EC4773500A9C91F /* AppDelegate.m */,
 				75FE95DD1EC4773500A9C91F /* ViewController.h */,
 				75FE95DE1EC4773500A9C91F /* ViewController.m */,
-				75FE95F31EC47A7200A9C91F /* CoverView.h */,
-				75FE95F41EC47A7200A9C91F /* CoverView.m */,
 				75FE95E01EC4773500A9C91F /* Main.storyboard */,
 				75FE95E31EC4773500A9C91F /* Assets.xcassets */,
 				75FE95E51EC4773500A9C91F /* LaunchScreen.storyboard */,
@@ -170,10 +178,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75FE95F51EC47A7200A9C91F /* CoverView.m in Sources */,
 				75FE95DF1EC4773500A9C91F /* ViewController.m in Sources */,
 				75FE95F21EC4789A00A9C91F /* UIView+FrameAdjust.m in Sources */,
 				75FE95DC1EC4773500A9C91F /* AppDelegate.m in Sources */,
+				75485CDD1EC58262004D9EB0 /* UnlockView.m in Sources */,
 				75FE95D91EC4773500A9C91F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,11 +296,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/SlideLightLabel/Tools/PrefixHeader.pch";
 				INFOPLIST_FILE = SlideLightLabel/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Future-Version.SlideLightLabel";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -300,11 +312,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/SlideLightLabel/Tools/PrefixHeader.pch";
 				INFOPLIST_FILE = SlideLightLabel/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Future-Version.SlideLightLabel";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
